@@ -1,1 +1,2 @@
-"# masterin7ways" 
+visit site here
+https://masterin7ways.vercel.app/
