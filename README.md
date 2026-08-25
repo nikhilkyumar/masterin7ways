@@ -1,2 +1,4 @@
 visit site here
-https://masterin7ways.vercel.app/
+https://masterin7ways.com
+or
+masterin7ways.in
