@@ -1517,4 +1517,15 @@ a {
 
 .brand img[alt="Insta360"] {
   height: 140px;
+}/* =========================================================
+   MOBILE — MOVE BRAND + PHOTO SECTION UP
+========================================================= */
+
+@media screen and (max-width: 767px) {
+
+  /* Move the entire showcase section upward */
+  .showcase-section {
+    margin-top: -870px;
+  }
+
 }
