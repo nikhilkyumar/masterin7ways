@@ -5,76 +5,122 @@ function App() {
   // Rotation in degrees: 0 → 360
   const [rotation, setRotation] = useState(0);
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      /*
-        Mouse position controls the 360° rotation.
+useEffect(() => {
 
-        Far left   = 270°
-        Center     = 0°
-        Far right  = 90°
-      */
+  let mouseRotation = 0;
+  let scrollRotation = 0;
 
-      const mousePercent = e.clientX / window.innerWidth;
+  const handleMouseMove = (e) => {
 
-      const mouseRotation = mousePercent * 360;
+    const mousePercent = e.clientX / window.innerWidth;
 
-      setRotation(mouseRotation);
-    };
+    /*
+      Convert mouse position to 0 → 360 degrees
+    */
 
-    const handleScroll = () => {
-      /*
-        Scrolling also rotates the character.
+    mouseRotation = mousePercent * 360;
 
-        Every 300px of scrolling = another rotation.
-      */
+    setRotation(mouseRotation);
+  };
 
-      const scrollRotation = (window.scrollY / 300) * 360;
 
-      // Keep rotation between 0 and 360
-      const normalizedRotation = scrollRotation % 360;
+  const handleScroll = () => {
 
-      setRotation(normalizedRotation);
-    };
+    /*
+      Every 1200px of scrolling
+      completes one 360° rotation.
+    */
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", handleScroll);
+    scrollRotation = (window.scrollY / 1200) * 360;
 
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    scrollRotation = scrollRotation % 360;
+
+    setRotation(scrollRotation);
+  };
+
+
+  window.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("scroll", handleScroll);
+
+
+  return () => {
+
+    window.removeEventListener(
+      "mousemove",
+      handleMouseMove
+    );
+
+    window.removeEventListener(
+      "scroll",
+      handleScroll
+    );
+
+  };
+
+}, []);
+
+
+/*
+  CHARACTER VIEW
+*/
+
+const getCharacterImage = () => {
+
+  /*
+    FRONT
+    315° → 360°
+    0° → 45°
+  */
+
+  if (
+    rotation >= 315 ||
+    rotation < 45
+  ) {
+    return "/character/front.png";
+  }
 
 
   /*
-    Choose the correct character image
-    based on the current rotation.
+    RIGHT
+    45° → 135°
   */
 
-  const getCharacterImage = () => {
-    // FRONT
-    if (rotation >= 315 || rotation < 45) {
-      return "/character/front.png";
-    }
+  if (
+    rotation >= 45 &&
+    rotation < 135
+  ) {
+    return "/character/right.png";
+  }
 
-    // RIGHT
-    if (rotation >= 45 && rotation < 135) {
-      return "/character/right.png";
-    }
 
-    // BACK
-    if (rotation >= 135 && rotation < 225) {
-      return "/character/back.png";
-    }
+  /*
+    BACK
+    135° → 225°
+  */
 
-    // LEFT
-    if (rotation >= 225 && rotation < 315) {
-      return "/character/left.png";
-    }
+  if (
+    rotation >= 135 &&
+    rotation < 225
+  ) {
+    return "/character/back.png";
+  }
 
-    return "/character/front.png";
-  };
+
+  /*
+    LEFT
+    225° → 315°
+  */
+
+  if (
+    rotation >= 225 &&
+    rotation < 315
+  ) {
+    return "/character/left.png";
+  }
+
+
+  return "/character/front.png";
+};
 
 
   return (
@@ -159,7 +205,9 @@ function App() {
 
         <div className="hero-contact">
 
-          <button className="contact-button">
+         <a
+           href="mailto:masterin7ways@gmail.com?subject=Website%20Enquiry&body=Hello%20Masterin7ways,%0A%0AI%20would%20like%20to%20discuss%20a%20project."
+          className="contact-button">
 
             <span>
               CONTACT US
@@ -169,26 +217,236 @@ function App() {
               →
             </span>
 
-          </button>
+          </a>
 
         </div>
 
       </section>
 
 
-      {/* SCROLL CONTENT */}
+{/* =====================================================
+    PROJECT SHOWCASE
+===================================================== */}
 
-      <section className="scroll-section">
+<section className="showcase-section">
 
-        <div className="scroll-content">
+  {/* BRAND LOGOS */}
 
-          <h2>
-            EXPLORE
-          </h2>
+  <div className="brands-track-wrapper">
 
-        </div>
+    <div className="brands-track">
+<div className="brand">
+  <img src="/logos/sony.png" alt="Sony" />
+</div>
 
-      </section>
+<div className="brand">
+  <img src="/logos/dji.png" alt="DJI" />
+</div>
+
+<div className="brand">
+  <img src="/logos/hasselblad.png" alt="Hasselblad" />
+</div>
+
+<div className="brand">
+  <img src="/logos/sigma.png" alt="Sigma" />
+</div>
+
+<div className="brand">
+  <img src="/logos/insta360.png" alt="Insta360" />
+</div>
+
+      {/* duplicate for seamless loop */}
+<div className="brand">
+  <img src="/logos/sony.png" alt="Sony" />
+</div>
+
+<div className="brand">
+  <img src="/logos/dji.png" alt="DJI" />
+</div>
+
+<div className="brand">
+  <img src="/logos/hasselblad.png" alt="Hasselblad" />
+</div>
+
+<div className="brand">
+  <img src="/logos/sigma.png" alt="Sigma" />
+</div>
+
+<div className="brand">
+  <img src="/logos/insta360.png" alt="Insta360" />
+</div>
+
+    </div>
+
+  </div>
+
+
+  {/* =================================================
+      IMAGE ROW 1
+  ================================================= */}
+
+  <div className="gallery-row gallery-row-left">
+
+    <div className="gallery-track">
+       <div className="gallery-card large">
+        <img
+          src="/projects/image1.jpg"
+          alt="Mountain landscape"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card large">
+        <img
+          src="/projects/ganesh.jpg"
+          alt="ganesh"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card extra-large">
+        <img
+          src="/projects/portrait.jpg"
+          alt="Portrait"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card medium">
+        <img
+          src="/projects/horse.jpg"
+          alt="horse"
+          decoding="async"
+        />
+      </div>
+
+
+      {/* duplicate */}
+      <div className="gallery-card large">
+        <img
+          src="/projects/image1.jpg"
+          alt="Mountain landscape"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card large">
+        <img
+          src="/projects/ganesh.jpg"
+          alt="ganesh"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card extra-large">
+        <img
+          src="/projects/portrait.jpg"
+          alt="Portrait"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card medium">
+        <img
+          src="/projects/horse.jpg"
+          alt="horse"
+          decoding="async"
+        />
+      </div>
+
+    </div>
+
+  </div>
+
+
+  {/* =================================================
+      IMAGE ROW 2
+  ================================================= */}
+
+  <div className="gallery-row gallery-row-right">
+
+    <div className="gallery-track">
+
+      <div className="gallery-card wide">
+        <img
+          src="/projects/sitting.jpg"
+          alt="sitting near ghat"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card wide">
+        <img
+          src="/projects/model.jpg"
+          alt="3d model"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card wide">
+        <img
+          src="/projects/temple.jpg"
+          alt="Temple"
+          decoding="async"
+        />
+      </div>
+
+
+  <div className="gallery-card extra-large">
+    <img src="/projects/table.jpg" alt="Project 7" decoding="async"/>
+  </div>
+
+
+      {/* duplicate */}
+
+      <div className="gallery-card wide">
+        <img
+          src="/projects/sitting.jpg"
+          alt="sitting near ghat"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card wide">
+        <img
+          src="/projects/model.jpg"
+          alt="3d model"
+          decoding="async"
+        />
+      </div>
+
+      <div className="gallery-card wide">
+        <img
+          src="/projects/temple.jpg"
+          alt="Temple"
+         decoding="async"
+        />
+      </div>
+
+  <div className="gallery-card extra-large">
+    <img src="/projects/table.jpg" alt="Project 7" decoding="async" />
+    
+  </div>
+
+    </div>
+
+  </div>
+
+
+  {/* DOTS */}
+
+  <div className="showcase-dots">
+
+    <span className="active"></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </div>
+
+</section>
 
     </main>
   );

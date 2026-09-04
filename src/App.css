@@ -445,6 +445,7 @@ a {
   justify-content: space-between;
 
   color: #ffffff;
+  text-decoration: none;
 
   background:
     linear-gradient(#080808, #080808) padding-box,
@@ -1107,4 +1108,413 @@ a {
   font-weight: 900;
 
   letter-spacing: -0.08em;
+}
+/* =========================================================
+   PROJECT SHOWCASE
+========================================================= */
+
+.showcase-section {
+  width: 100%;
+  min-height: 100vh;
+
+  background: #050505;
+
+  padding: 700px 0 100px;
+
+  overflow: hidden;
+
+  position: relative;
+}
+
+
+/* =========================================================
+   BRAND LOGOS
+========================================================= */
+
+.brands-track-wrapper {
+  width: 100%;
+
+  overflow: hidden;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+  margin-bottom: 30px;
+}
+
+
+.brands-track {
+  display: flex;
+
+  width: max-content;
+
+  align-items: center;
+
+  animation: brandsMove 22s linear infinite;
+}
+
+
+.brand {
+  height: 70px;
+
+  min-width: 190px;
+
+  padding: 0 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 25px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+
+  color: #eeeeee;
+
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+
+  white-space: nowrap;
+}
+
+
+.brand.hasselblad {
+  font-size: 18px;
+
+  font-style: italic;
+
+  letter-spacing: 5px;
+}
+
+
+.brand.insta {
+  font-size: 20px;
+}
+
+
+@keyframes brandsMove {
+
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+
+}
+
+
+/* =========================================================
+   GALLERY ROW
+========================================================= */
+
+.gallery-row {
+  width: 100%;
+
+  overflow: hidden;
+
+  margin-bottom: 12px;
+}
+
+
+.gallery-track {
+  display: flex;
+  width: max-content;
+  gap: 10px;
+
+  will-change: transform;
+
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+}
+
+.gallery-row-left .gallery-track {
+  animation: galleryLeft 45s linear infinite;
+}
+
+.gallery-row-right .gallery-track {
+  animation: galleryRight 50s linear infinite;
+}
+
+@keyframes galleryLeft {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes galleryRight {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+
+
+
+/* =========================================================
+   IMAGE CARDS
+========================================================= */
+
+.gallery-card {
+
+  flex-shrink: 0;
+
+  height: 320px;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 255, 255, 0.45);
+
+  background: #111;
+
+  position: relative;
+
+  cursor: pointer;
+}
+
+
+.gallery-card.large {
+  width: 310px;
+}
+
+
+.gallery-card.extra-large {
+  width: 430px;
+}
+
+
+.gallery-card.medium {
+  width: 200px;
+}
+
+
+.gallery-card.wide {
+  width: 400px;
+}
+
+
+.gallery-card img {
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.7s ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.gallery-card:hover img {
+
+  transform: scale(1.08);
+
+  filter: brightness(1.1);
+}
+
+
+/* Pause row when hovering */
+
+.gallery-row:hover .gallery-track {
+
+  animation-play-state: paused;
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+.showcase-dots {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin-top: 40px;
+}
+
+
+.showcase-dots span {
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.25);
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.showcase-dots span.active {
+
+  width: 20px;
+
+  border-radius: 10px;
+
+  background: #ffffff;
+}
+/* =========================================================
+   TABLET / iPAD ONLY
+   Does NOT affect normal laptop/desktop
+========================================================= */
+/* =========================================================
+   TABLET / iPAD POSITIONING
+========================================================= */
+@media screen and (min-width: 768px) and (max-width: 1366px) {
+
+  .hero {
+    position: relative;
+  }
+
+
+  /* MASTERIN7WAYS — move upward */
+
+  .hero-title {
+    top: 50px;
+  }
+
+
+  /* CHARACTER — move far upward */
+
+  .character-container {
+    top: -600px;
+    z-index: 5;
+  }
+
+  .character-image {
+    max-height: 900px;
+  }
+
+
+  /* TEXT — move downward */
+
+  .hero-copy {
+    top: 680px;
+    z-index: 10;
+  }
+
+
+  /* CONTACT — move downward */
+
+  .hero-contact {
+    top: 680px;
+    z-index: 10;
+  }
+
+
+  /* =====================================================
+     LOWER ELEMENTS — MOVE UP
+  ===================================================== */
+
+  /* Make the hero finish earlier */
+
+  .hero {
+    min-height: 820px;
+  }
+
+
+  /* Move showcase upward */
+
+  .showcase-section {
+    margin-top: -500px;
+  }
+
+
+  /* Logo strip closer to gallery */
+
+  .brands-track-wrapper {
+    margin-bottom: 20px;
+  }
+
+
+  /* Rows closer together */
+
+  .gallery-row {
+    margin-bottom: 8px;
+  }
+
+
+  /* Dots closer to gallery */
+
+  .showcase-dots {
+    margin-top: 25px;
+  }
+
+}
+.brand {
+  height: 70px;
+  min-width: 190px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 30px;
+
+  border-right: 1px solid rgba(255,255,255,0.15);
+
+  flex-shrink: 0;
+}
+
+.brand img {
+  display: block;
+
+  width: auto;
+  height: 38px;
+
+  max-width: 150px;
+
+  object-fit: contain;
+
+  transition: transform 0.3s ease;
+}.brand img[alt="Sony"] {
+  height: 32px;
+}
+
+.brand img[alt="DJI"] {
+  height: 42px;
+}
+
+.brand img[alt="Hasselblad"] {
+  height: 140px;
+}
+
+.brand img[alt="Sigma"] {
+  height: 140px;
+}
+
+.brand img[alt="Insta360"] {
+  height: 140px;
 }
