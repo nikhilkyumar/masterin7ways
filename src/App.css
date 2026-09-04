@@ -1,0 +1,1053 @@
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================
+   RESET
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #050505;
+  overflow-x: hidden;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+
+/* ========================================
+   MAIN SITE
+======================================== */
+
+.site {
+  width: 100%;
+  min-height: 100vh;
+  background: #050505;
+}
+
+
+/* ========================================
+   TOP STRIP
+======================================== */
+
+.top-strip {
+  width: 100vw;
+  height: 28px;
+
+  margin: 15px 0 0 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #d9d9d9;
+
+  color: #555;
+
+  font-size: 8px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  animation: stripReveal 0.8s ease forwards;
+
+  transform-origin: center;
+
+  position: relative;
+  left: 0;
+}
+
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+.navbar {
+  width: calc(100% - 70px);
+
+  margin: 0 auto;
+
+  height: 78px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  position: relative;
+
+  z-index: 20;
+}
+
+.navbar a {
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  opacity: 0;
+
+  transform: translateY(-15px);
+
+  animation: navReveal 0.7s ease forwards;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.navbar a:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.navbar a:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.navbar a:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.navbar a:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.navbar a:hover {
+  opacity: 0.65;
+
+  transform: translateY(-3px);
+}
+
+@keyframes navReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.navbar a:hover {
+  opacity: 0.65;
+  transform: translateY(-2px);
+}
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {
+  position: relative;
+
+  width: 100%;
+
+  min-height: calc(100vh - 140px);
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 55%,
+      rgba(90, 90, 90, 0.08),
+      transparent 35%
+    );
+}.hero::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.12;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent 75%
+  );
+
+  z-index: 0;
+}
+.character-container::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 600px;
+
+  left: 50%;
+  bottom: 5%;
+
+  transform: translateX(-50%);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 255, 255, 0.09),
+      transparent 65%
+    );
+
+  filter: blur(35px);
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  animation: characterGlow 5s ease-in-out infinite;
+}
+
+
+/* ========================================
+   HUGE TITLE
+======================================== */
+.hero-title {
+  position: absolute;
+
+  top: 25px;
+  left: 50%;
+
+  width: 100vw;
+  max-width: 100vw;
+
+  margin: 0;
+  padding: 0;
+
+  text-align: center;
+
+  font-size: clamp(55px, 11vw, 180px);
+
+  line-height: 0.78;
+
+  font-weight: 900;
+
+  letter-spacing: -0.085em;
+
+  white-space: nowrap;
+
+  color: #cfcfcf;
+
+  z-index: 1;
+
+  user-select: none;
+
+  /* ONLY center positioning */
+  transform: translateX(-50%);
+
+  opacity: 0;
+
+  animation: titleReveal 1.2s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+
+/* ========================================
+   CHARACTER
+======================================== */
+
+.character-container {
+  position: absolute;
+
+  left: 50%;
+
+  /* Move character upward */
+  bottom: 10px;
+
+  transform: translateX(-50%);
+
+  /* Make character bigger */
+  height: 90%;
+
+  z-index: 5;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-end;
+
+  pointer-events: auto;
+}
+.character-image {
+  display: block;
+
+  height: 100%;
+  width: auto;
+
+  object-fit: contain;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+  filter:
+    drop-shadow(0 20px 30px rgba(0, 0, 0, 0.5));
+
+  opacity: 0;
+
+  transform: translateY(80px);
+
+  animation:
+    characterReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards,
+    characterFloat 5s ease-in-out 1.6s infinite;
+
+  will-change: transform;
+}
+
+
+/* ========================================
+   LEFT HERO COPY
+======================================== */
+
+.hero-copy {
+  position: absolute;
+
+  left: 4%;
+  top: 260px;
+
+  width: 430px;
+
+  z-index: 10;
+
+  opacity: 0;
+
+  transform: translateX(-40px);
+
+  animation:
+    copyReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+}
+
+.hero-copy p {
+  font-size: 23px;
+
+  line-height: 1.6;
+
+  font-weight: 400;
+
+  letter-spacing: -0.02em;
+
+  margin-bottom: 4px;
+}
+
+.star {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 21px;
+  height: 21px;
+
+  margin-left: 8px;
+
+  border-radius: 50%;
+
+  background: #ff9b35;
+
+  color: #101010;
+
+  font-size: 12px;
+
+  vertical-align: middle;
+}
+
+
+/* ========================================
+   CONTACT AREA
+======================================== */
+
+.hero-contact {
+  position: absolute;
+
+  right: 5%;
+  top: 295px;
+
+  z-index: 15;
+
+  opacity: 0;
+
+  transform: translateX(40px);
+
+  animation:
+    contactReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+}
+
+
+/* ========================================
+   CONTACT BUTTON
+======================================== */
+
+.contact-button {
+  position: relative;
+
+  width: 270px;
+  height: 84px;
+
+  padding: 0 14px 0 38px;
+
+  border-radius: 50px;
+
+  border: 2px solid transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(#080808, #080808) padding-box,
+    linear-gradient(
+      100deg,
+      #ffffff,
+      #b000ff,
+      #ff8a00
+    ) border-box;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 0 15px rgba(190, 0, 255, 0.35),
+    0 0 30px rgba(255, 140, 0, 0.2);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.contact-button span:first-child {
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.contact-button:hover {
+  transform: scale(1.05);
+
+  box-shadow:
+    0 0 20px rgba(190, 0, 255, 0.55),
+    0 0 45px rgba(255, 140, 0, 0.35);
+}
+
+
+/* ========================================
+   CONTACT ARROW
+======================================== */
+
+.contact-arrow {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+
+  color: #111111;
+
+  font-size: 28px;
+  font-weight: 400;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.contact-button:hover .contact-arrow {
+  transform: translateX(5px);
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 1100px) {
+
+  .navbar {
+    width: calc(100% - 70px);
+  }
+
+  .navbar a {
+    font-size: 15px;
+  }
+
+  .hero-copy {
+    left: 5%;
+    top: 250px;
+    width: 350px;
+  }
+
+  .hero-copy p {
+    font-size: 18px;
+  }
+
+  .hero-contact {
+    right: 4%;
+    top: 280px;
+  }
+
+  .contact-button {
+    width: 230px;
+    height: 72px;
+  }
+
+  .contact-button span:first-child {
+    font-size: 16px;
+  }
+
+  .contact-arrow {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+/* =========================================================
+   MOBILE ONLY
+   DESKTOP IS NOT TOUCHED
+========================================================= */
+
+@media (max-width: 700px) {
+
+  /* =======================================================
+     PAGE
+  ======================================================= */
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .site {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+
+  /* =======================================================
+     TOP BAR
+  ======================================================= */
+
+  .top-strip {
+    width: 100%;
+    height: 24px;
+
+    margin: 10px 0 0;
+
+    font-size: 7px;
+    letter-spacing: 0.3px;
+  }
+
+
+  /* =======================================================
+     NAVIGATION
+  ======================================================= */
+
+  .navbar {
+    width: calc(100% - 40px);
+
+    height: 65px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar a {
+    font-size: 11px;
+  }
+
+  /* Hide CUSTOMERS only on mobile */
+
+  .navbar a:nth-child(2) {
+    display: none;
+  }
+
+
+  /* =======================================================
+     HERO
+     
+     IMPORTANT:
+     Make the hero MUCH taller than the phone screen.
+     
+     This allows the user to scroll down.
+  ======================================================= */
+
+  .hero {
+
+    position: relative;
+
+    width: 100%;
+
+    /*
+      First screen + second content area
+    */
+    height: 160svh;
+
+    min-height: 160svh;
+
+    overflow: hidden;
+
+    background: #050505;
+  }
+
+
+  /* =======================================================
+     BIG TITLE
+     
+     ONLY APPEARS ON FIRST SCREEN
+  ======================================================= */
+
+  .hero-title {
+
+    position: absolute;
+
+    top: 25px;
+
+    left: 50%;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    text-align: center;
+
+    font-size: 14vw;
+
+    line-height: 0.85;
+
+    font-weight: 900;
+
+    letter-spacing: -0.095em;
+
+    white-space: nowrap;
+
+    transform: translateX(-50%);
+
+    z-index: 1;
+  }
+
+
+  /* =======================================================
+     CHARACTER
+     
+     BIGGER + CENTERED
+     
+     STAYS ON FIRST SCREEN
+  ======================================================= */
+
+  .character-container {
+
+    position: absolute;
+
+    left: 50%;
+
+    /*
+      Character sits in first viewport.
+    */
+    top: 40px;
+
+    bottom: auto;
+
+    transform: translateX(-50%);
+
+    /*
+      BIG CHARACTER
+    */
+    height: 72svh;
+
+    width: auto;
+
+    z-index: 5;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+  }
+
+
+  .character-image {
+
+    height: 100%;
+
+    width: auto;
+
+    max-width: none;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+  }
+
+
+  /* =======================================================
+     CHARACTER GLOW
+  ======================================================= */
+
+  .character-container::before {
+
+    width: 280px;
+
+    height: 480px;
+
+    bottom: 0;
+
+    filter: blur(35px);
+  }
+
+
+  /* =======================================================
+     DESCRIPTION TEXT
+     
+     IMPORTANT:
+     Move it DOWN into the scroll area.
+  ======================================================= */
+
+  .hero-copy {
+
+    position: absolute;
+
+    left: 24px;
+
+    /*
+      This is BELOW the first screen.
+    */
+    top: 90svh;
+
+    bottom: auto;
+
+    width: calc(100% - 48px);
+
+    z-index: 10;
+
+    opacity: 1;
+
+    transform: none;
+
+    animation: none;
+  }
+
+
+  .hero-copy p {
+
+    font-size: 18px;
+
+    line-height: 1.45;
+
+    letter-spacing: -0.025em;
+
+    margin-bottom: 8px;
+  }
+
+
+  .hero-copy p:nth-child(2) {
+
+    max-width: 330px;
+  }
+
+
+  .star {
+
+    width: 18px;
+
+    height: 18px;
+
+    margin-left: 6px;
+
+    font-size: 9px;
+  }
+
+
+  /* =======================================================
+     CONTACT BUTTON
+     
+     IMPORTANT:
+     ALSO BELOW THE FIRST SCREEN
+  ======================================================= */
+
+  .hero-contact {
+
+    position: absolute;
+
+    left: 24px;
+
+    right: auto;
+
+    /*
+      Below the description.
+    */
+    top: 115svh;
+
+    bottom: auto;
+
+    transform: none;
+
+    z-index: 20;
+
+    opacity: 1;
+
+    animation: none;
+  }
+
+
+  /* =======================================================
+     CONTACT BUTTON
+  ======================================================= */
+
+  .contact-button {
+
+    width: 190px;
+
+    height: 58px;
+
+    padding: 0 10px 0 23px;
+
+    border-radius: 40px;
+  }
+
+
+  .contact-button span:first-child {
+
+    font-size: 13px;
+  }
+
+
+  .contact-arrow {
+
+    width: 38px;
+
+    height: 38px;
+
+    font-size: 20px;
+  }
+
+
+  /* =======================================================
+     CHARACTER ANIMATION
+  ======================================================= */
+
+  .character-image {
+
+    animation:
+      characterRevealMobile
+      1s
+      cubic-bezier(0.16, 1, 0.3, 1)
+      0.3s
+      forwards,
+
+      characterFloatMobile
+      5s
+      ease-in-out
+      1.4s
+      infinite;
+  }
+
+
+  @keyframes characterRevealMobile {
+
+    0% {
+
+      opacity: 0;
+
+      transform:
+        translateY(60px)
+        scale(0.94);
+    }
+
+    100% {
+
+      opacity: 1;
+
+      transform:
+        translateY(0)
+        scale(1);
+    }
+  }
+
+
+  @keyframes characterFloatMobile {
+
+    0% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-8px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+}
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+@keyframes stripReveal {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+@keyframes characterReveal {
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(100px)
+      scale(0.94);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+@keyframes copyReveal {
+  0% {
+    opacity: 0;
+
+    transform: translateX(-40px);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: translateX(0);
+  }
+}
+@keyframes contactReveal {
+  0% {
+    opacity: 0;
+
+    transform: translateX(40px);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: translateX(0);
+  }
+}
+@keyframes characterGlow {
+  0% {
+    opacity: 0.45;
+    transform: translateX(-50%) scale(0.95);
+  }
+
+  50% {
+    opacity: 0.75;
+    transform: translateX(-50%) scale(1.05);
+  }
+
+  100% {
+    opacity: 0.45;
+    transform: translateX(-50%) scale(0.95);
+  }
+}
+@media (max-width: 700px) {
+  .hero-title {
+    animation: mobileTitleReveal 1s
+      cubic-bezier(0.16, 1, 0.3, 1)
+      forwards;
+  }
+}
+
+@keyframes mobileTitleReveal {
+  0% {
+    opacity: 0;
+    transform:
+      translateX(-50%)
+      translateY(30px)
+      scaleX(0.84);
+  }
+
+  100% {
+    opacity: 1;
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scaleX(0.88);
+  }
+}
+/* =========================================================
+   INTRO SECTION
+========================================================= */
+
+.intro-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 70vh;
+
+  padding: 140px 5%;
+
+  background: #050505;
+}
