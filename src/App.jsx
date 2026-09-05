@@ -7,46 +7,71 @@ function Homepage() {
   // Rotation in degrees: 0 → 360
   const [rotation, setRotation] = useState(0);
 
-useEffect(() => {
-
+ useEffect(() => {
   let mouseRotation = 0;
   let scrollRotation = 0;
 
+  let animationFrame = null;
+
+  let isScrolling = false;
+
+  const updateRotation = () => {
+    animationFrame = null;
+
+    if (isScrolling) {
+      setRotation(scrollRotation);
+    } else {
+      setRotation(mouseRotation);
+    }
+  };
+
+  const requestUpdate = () => {
+    if (animationFrame === null) {
+      animationFrame = requestAnimationFrame(updateRotation);
+    }
+  };
+
   const handleMouseMove = (e) => {
-
-    const mousePercent = e.clientX / window.innerWidth;
-
-    /*
-      Convert mouse position to 0 → 360 degrees
-    */
+    const mousePercent =
+      e.clientX / window.innerWidth;
 
     mouseRotation = mousePercent * 360;
 
-    setRotation(mouseRotation);
-  };
+    isScrolling = false;
 
+    requestUpdate();
+  };
 
   const handleScroll = () => {
-
     /*
-      Every 1200px of scrolling
-      completes one 360° rotation.
+      Scroll controls character rotation.
+      1200px = 360°
     */
 
-    scrollRotation = (window.scrollY / 1200) * 360;
+    scrollRotation =
+      (window.scrollY / 1200) * 360;
 
-    scrollRotation = scrollRotation % 360;
+    scrollRotation =
+      scrollRotation % 360;
 
-    setRotation(scrollRotation);
+    isScrolling = true;
+
+    requestUpdate();
   };
 
+  window.addEventListener(
+    "mousemove",
+    handleMouseMove,
+    { passive: true }
+  );
 
-  window.addEventListener("mousemove", handleMouseMove);
-  window.addEventListener("scroll", handleScroll);
-
+  window.addEventListener(
+    "scroll",
+    handleScroll,
+    { passive: true }
+  );
 
   return () => {
-
     window.removeEventListener(
       "mousemove",
       handleMouseMove
@@ -57,8 +82,10 @@ useEffect(() => {
       handleScroll
     );
 
+    if (animationFrame !== null) {
+      cancelAnimationFrame(animationFrame);
+    }
   };
-
 }, []);
 
 
@@ -292,7 +319,7 @@ const getCharacterImage = () => {
     <div className="gallery-track">
        <div className="gallery-card large">
         <img
-          src="/projects/image1.jpg"
+          src="/projects/image1.webp"
           alt="Mountain landscape"
           decoding="async"
         />
@@ -300,7 +327,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card large">
         <img
-          src="/projects/ganesh.jpg"
+          src="/projects/ganesh.webp"
           alt="ganesh"
           decoding="async"
         />
@@ -308,7 +335,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card extra-large">
         <img
-          src="/projects/portrait.jpg"
+          src="/projects/portrait.webp"
           alt="Portrait"
           decoding="async"
         />
@@ -316,7 +343,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card medium">
         <img
-          src="/projects/horse.jpg"
+          src="/projects/horse.webp"
           alt="horse"
           decoding="async"
         />
@@ -326,7 +353,7 @@ const getCharacterImage = () => {
       {/* duplicate */}
       <div className="gallery-card large">
         <img
-          src="/projects/image1.jpg"
+          src="/projects/image1.webp"
           alt="Mountain landscape"
           decoding="async"
         />
@@ -334,7 +361,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card large">
         <img
-          src="/projects/ganesh.jpg"
+          src="/projects/ganesh.webp"
           alt="ganesh"
           decoding="async"
         />
@@ -342,7 +369,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card extra-large">
         <img
-          src="/projects/portrait.jpg"
+          src="/projects/portrait.webp"
           alt="Portrait"
           decoding="async"
         />
@@ -350,7 +377,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card medium">
         <img
-          src="/projects/horse.jpg"
+          src="/projects/horse.webp"
           alt="horse"
           decoding="async"
         />
@@ -371,7 +398,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card wide">
         <img
-          src="/projects/sitting.jpg"
+          src="/projects/sitting.webp"
           alt="sitting near ghat"
           decoding="async"
         />
@@ -379,7 +406,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card wide">
         <img
-          src="/projects/model.jpg"
+          src="/projects/model.webp"
           alt="3d model"
           decoding="async"
         />
@@ -387,7 +414,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card wide">
         <img
-          src="/projects/temple.jpg"
+          src="/projects/temple.webp"
           alt="Temple"
           decoding="async"
         />
@@ -395,7 +422,7 @@ const getCharacterImage = () => {
 
 
   <div className="gallery-card extra-large">
-    <img src="/projects/table.jpg" alt="Project 7" decoding="async"/>
+    <img src="/projects/table.webp" alt="Project 7" decoding="async"/>
   </div>
 
 
@@ -403,7 +430,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card wide">
         <img
-          src="/projects/sitting.jpg"
+          src="/projects/sitting.webp"
           alt="sitting near ghat"
           decoding="async"
         />
@@ -411,7 +438,7 @@ const getCharacterImage = () => {
 
       <div className="gallery-card wide">
         <img
-          src="/projects/model.jpg"
+          src="/projects/model.webp"
           alt="3d model"
           decoding="async"
         />
@@ -419,14 +446,14 @@ const getCharacterImage = () => {
 
       <div className="gallery-card wide">
         <img
-          src="/projects/temple.jpg"
+          src="/projects/temple.webp"
           alt="Temple"
          decoding="async"
         />
       </div>
 
   <div className="gallery-card extra-large">
-    <img src="/projects/table.jpg" alt="Project 7" decoding="async" />
+    <img src="/projects/table.webp" alt="Project 7" decoding="async" />
     
   </div>
 
@@ -449,6 +476,9 @@ const getCharacterImage = () => {
   </div>
 
 </section>
+{/* ABOUT SECTION */}
+
+<About embedded={true} />
 
     </main>
   );

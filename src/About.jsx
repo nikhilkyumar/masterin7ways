@@ -2,7 +2,7 @@ import "./About.css";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
-function About() {
+function About( {embedded = false }) {
 
   useEffect(() => {
   const animatedElements =
@@ -39,29 +39,35 @@ function About() {
 
 
   return (
-    <main className="about-page">
+    <main
+  id={embedded ? "about" : undefined}
+  className={embedded ? "about-page about-embedded" : "about-page"}>
 
 
       {/* =====================================================
           TOP NAV
       ===================================================== */}
 
-      <header className="about-header scroll-animate">
+     <header className="about-header">
 
-        <Link
-          to="/"
-          className="about-back"
-        >
-          ← HOME
-        </Link>
+  {!embedded && (
+    <Link
+      to="/"
+      className="about-back"
+    >
+      ← HOME
+    </Link>
+  )}
 
-        <div className="about-logo">
-          MASTERIN7WAYS
-        </div>
+  {!embedded && (
+    <div className="about-logo">
+      MASTERIN7WAYS
+    </div>
+  )}
 
-        <div className="about-header-space"></div>
+  <div className="about-header-space"></div>
 
-      </header>
+</header>
 
 
       {/* =====================================================

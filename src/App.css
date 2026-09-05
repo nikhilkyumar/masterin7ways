@@ -1208,40 +1208,70 @@ a {
 
 }
 
-
 /* =========================================================
    GALLERY ROW
 ========================================================= */
 
 .gallery-row {
   width: 100%;
-
   overflow: hidden;
-
   margin-bottom: 12px;
+
+  /* Prevent painting outside the visible gallery */
+  contain: paint;
 }
 
 
 .gallery-track {
   display: flex;
-  width: max-content;
-  gap: 10px;
+  align-items: center;
+  gap: 24px;
 
-  will-change: transform;
+  width: max-content;
+
+  /*
+    IMPORTANT:
+    Only the track moves.
+  */
+
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 
   transform: translate3d(0, 0, 0);
+
   backface-visibility: hidden;
+
+  /*
+    Tell browser this element will continuously transform.
+  */
+  will-change: transform;
 }
+
+
+/* =========================================================
+   ROW 1
+========================================================= */
 
 .gallery-row-left .gallery-track {
   animation: galleryLeft 45s linear infinite;
 }
 
+
+/* =========================================================
+   ROW 2
+========================================================= */
+
 .gallery-row-right .gallery-track {
-  animation: galleryRight 50s linear infinite;
+  animation: galleryRight 45s linear infinite;
 }
+
+
+/* =========================================================
+   LEFT ANIMATION
+========================================================= */
 
 @keyframes galleryLeft {
+
   from {
     transform: translate3d(0, 0, 0);
   }
@@ -1249,9 +1279,16 @@ a {
   to {
     transform: translate3d(-50%, 0, 0);
   }
+
 }
+
+
+/* =========================================================
+   RIGHT ANIMATION
+========================================================= */
 
 @keyframes galleryRight {
+
   from {
     transform: translate3d(-50%, 0, 0);
   }
@@ -1259,9 +1296,8 @@ a {
   to {
     transform: translate3d(0, 0, 0);
   }
+
 }
-
-
 
 
 
@@ -1270,47 +1306,48 @@ a {
 ========================================================= */
 
 .gallery-card {
-
   flex-shrink: 0;
-
   height: 320px;
 
   overflow: hidden;
 
   border-radius: 18px;
-
   border: 1px solid rgba(255, 255, 255, 0.45);
 
   background: #111;
 
   position: relative;
-
   cursor: pointer;
+
+  /* Rendering optimization */
+  contain: paint;
 }
 
+
+/* CARD SIZES */
 
 .gallery-card.large {
   width: 310px;
 }
 
-
 .gallery-card.extra-large {
   width: 430px;
 }
 
-
 .gallery-card.medium {
   width: 200px;
 }
-
 
 .gallery-card.wide {
   width: 400px;
 }
 
 
-.gallery-card img {
+/* =========================================================
+   IMAGES
+========================================================= */
 
+.gallery-card img {
   width: 100%;
   height: 100%;
 
@@ -1318,9 +1355,18 @@ a {
 
   object-fit: cover;
 
+  /*
+    Keep image rendering simple.
+    Do NOT animate the image continuously.
+  */
+
+  backface-visibility: hidden;
+
+  transform: translate3d(0, 0, 0);
+
   transition:
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.7s ease;
+    transform 0.45s ease,
+    filter 0.45s ease;
 }
 
 
@@ -1329,10 +1375,9 @@ a {
 ========================================================= */
 
 .gallery-card:hover img {
+  transform: translate3d(0, 0, 0) scale(1.05);
 
-  transform: scale(1.08);
-
-  filter: brightness(1.1);
+  filter: brightness(1.08);
 }
 
 
