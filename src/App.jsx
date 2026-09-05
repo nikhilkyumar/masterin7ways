@@ -88,6 +88,35 @@ function Homepage() {
   };
 }, []);
 
+  // Stop marquee compositing when it is offscreen or while the page is moving.
+  useEffect(() => {
+    const tracks = document.querySelectorAll(".brands-track, .gallery-track");
+    let scrollTimeout;
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        entry.target.classList.toggle("is-in-viewport", entry.isIntersecting);
+      }),
+      { rootMargin: "200px 0px" }
+    );
+
+    tracks.forEach((track) => observer.observe(track));
+    const pauseWhileScrolling = () => {
+      document.documentElement.classList.add("is-scrolling");
+      window.clearTimeout(scrollTimeout);
+      scrollTimeout = window.setTimeout(() => {
+        document.documentElement.classList.remove("is-scrolling");
+      }, 140);
+    };
+    window.addEventListener("scroll", pauseWhileScrolling, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", pauseWhileScrolling);
+      window.clearTimeout(scrollTimeout);
+      document.documentElement.classList.remove("is-scrolling");
+    };
+  }, []);
+
 
 /*
   CHARACTER VIEW
@@ -265,44 +294,44 @@ const getCharacterImage = () => {
 
     <div className="brands-track">
 <div className="brand">
-  <img src="/logos/sony.png" alt="Sony" />
+  <img src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async" />
 </div>
 
 <div className="brand">
-  <img src="/logos/dji.png" alt="DJI" />
+  <img src="/logos/dji.png" alt="DJI" loading="lazy" decoding="async" />
 </div>
 
 <div className="brand">
-  <img src="/logos/hasselblad.png" alt="Hasselblad" />
+  <img src="/logos/hasselblad.png" alt="Hasselblad" loading="lazy" decoding="async" />
 </div>
 
 <div className="brand">
-  <img src="/logos/sigma.png" alt="Sigma" />
+  <img src="/logos/sigma.png" alt="Sigma" loading="lazy" decoding="async" />
 </div>
 
 <div className="brand">
-  <img src="/logos/insta360.png" alt="Insta360" />
+  <img src="/logos/insta360.png" alt="Insta360" loading="lazy" decoding="async" />
 </div>
 
       {/* duplicate for seamless loop */}
 <div className="brand">
-  <img src="/logos/sony.png" alt="Sony" />
+  <img src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async" />
 </div>
 
 <div className="brand">
-  <img src="/logos/dji.png" alt="DJI" />
+  <img src="/logos/dji.png" alt="DJI" loading="lazy" decoding="async" />
 </div>
 
 <div className="brand">
-  <img src="/logos/hasselblad.png" alt="Hasselblad" />
+  <img src="/logos/hasselblad.png" alt="Hasselblad" loading="lazy" decoding="async" />
 </div>
 
 <div className="brand">
-  <img src="/logos/sigma.png" alt="Sigma" />
+  <img src="/logos/sigma.png" alt="Sigma" loading="lazy" decoding="async" />
 </div>
 
 <div className="brand">
-  <img src="/logos/insta360.png" alt="Insta360" />
+  <img src="/logos/insta360.png" alt="Insta360" loading="lazy" decoding="async" />
 </div>
 
     </div>
@@ -408,6 +437,7 @@ const getCharacterImage = () => {
         <img
           src="/projects/model.webp"
           alt="3d model"
+          loading="lazy"
           decoding="async"
         />
       </div>
@@ -416,13 +446,14 @@ const getCharacterImage = () => {
         <img
           src="/projects/temple.webp"
           alt="Temple"
+          loading="lazy"
           decoding="async"
         />
       </div>
 
 
   <div className="gallery-card extra-large">
-    <img src="/projects/table.webp" alt="Project 7" decoding="async"/>
+    <img src="/projects/table.webp" alt="Project 7" loading="lazy" decoding="async" />
   </div>
 
 
@@ -440,6 +471,7 @@ const getCharacterImage = () => {
         <img
           src="/projects/model.webp"
           alt="3d model"
+          loading="lazy"
           decoding="async"
         />
       </div>
@@ -448,12 +480,13 @@ const getCharacterImage = () => {
         <img
           src="/projects/temple.webp"
           alt="Temple"
-         decoding="async"
+          loading="lazy"
+          decoding="async"
         />
       </div>
 
   <div className="gallery-card extra-large">
-    <img src="/projects/table.webp" alt="Project 7" decoding="async" />
+    <img src="/projects/table.webp" alt="Project 7" loading="lazy" decoding="async" />
     
   </div>
 

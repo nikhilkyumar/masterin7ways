@@ -1124,6 +1124,9 @@ a {
   overflow: hidden;
 
   position: relative;
+
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1000px;
 }
 
 
@@ -1151,6 +1154,8 @@ a {
   align-items: center;
 
   animation: brandsMove 22s linear infinite;
+  will-change: transform;
+  animation-play-state: paused;
 }
 
 
@@ -1245,6 +1250,7 @@ a {
     Tell browser this element will continuously transform.
   */
   will-change: transform;
+  animation-play-state: paused;
 }
 
 
@@ -1263,6 +1269,16 @@ a {
 
 .gallery-row-right .gallery-track {
   animation: galleryRight 45s linear infinite;
+}
+
+.brands-track.is-in-viewport,
+.gallery-track.is-in-viewport {
+  animation-play-state: running;
+}
+
+html.is-scrolling .brands-track,
+html.is-scrolling .gallery-track {
+  animation-play-state: paused;
 }
 
 
