@@ -1,7 +1,9 @@
 import "./App.css";
 import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import About from "./About";
 
-function App() {
+function Homepage() {
   // Rotation in degrees: 0 → 360
   const [rotation, setRotation] = useState(0);
 
@@ -137,7 +139,7 @@ const getCharacterImage = () => {
 
       <nav className="navbar">
 
-        <a href="#about">
+        <a href="/about">
           ABOUT
         </a>
 
@@ -149,7 +151,7 @@ const getCharacterImage = () => {
           PROJECTS
         </a>
 
-        <a href="#contact">
+        <a href="mailto:masterin7ways@gmail.com?subject=Website%20Enquiry&body=Hello%20Masterin7ways,%0A%0AI%20would%20like%20to%20discuss%20a%20project.">
           CONTACT
         </a>
 
@@ -449,6 +451,26 @@ const getCharacterImage = () => {
 </section>
 
     </main>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+
+        <Route
+          path="/"
+          element={<Homepage />}
+        />
+
+        <Route
+          path="/about"
+          element={<About />}
+        />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
