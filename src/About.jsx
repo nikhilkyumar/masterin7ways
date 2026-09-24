@@ -1,4 +1,4 @@
-import "./About.css";
+import { tw } from "./tailwind";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -6,7 +6,7 @@ function About( {embedded = false }) {
 
   useEffect(() => {
   const animatedElements =
-    document.querySelectorAll(".scroll-animate");
+    document.querySelectorAll("[data-reveal]");
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -14,7 +14,7 @@ function About( {embedded = false }) {
 
         if (entry.isIntersecting) {
 
-          entry.target.classList.add("show");
+          entry.target.dataset.visible = "true";
 
           // Animate only once
           observer.unobserve(entry.target);
@@ -41,31 +41,31 @@ function About( {embedded = false }) {
   return (
     <main
   id={embedded ? "about" : undefined}
-  className={embedded ? "about-page about-embedded" : "about-page"}>
+  className={tw.about}>
 
 
       {/* =====================================================
           TOP NAV
       ===================================================== */}
 
-     <header className="about-header">
+     <header className={tw.aboutHeader}>
 
   {!embedded && (
     <Link
       to="/"
-      className="about-back"
+      className={tw.aboutBack}
     >
       ← HOME
     </Link>
   )}
 
   {!embedded && (
-    <div className="about-logo">
+    <div className={tw.aboutLogo}>
       MASTERIN7WAYS
     </div>
   )}
 
-  <div className="about-header-space"></div>
+  <div className={tw.aboutHeaderSpace}></div>
 
 </header>
 
@@ -74,30 +74,30 @@ function About( {embedded = false }) {
           PAGE TITLE
       ===================================================== */}
 
-      <section className="about-hero">
+      <section className={tw.aboutHero}>
 
         {/* Decorations */}
 
         <img
           src="/about/star.png"
           alt=""
-          className="about-decoration decor-star scroll-animate"
+          data-reveal className={`${tw.decor} ${tw.decorStar} ${tw.reveal}`}
         />
 
         <img
           src="/about/fist.png"
           alt=""
-          className="about-decoration decor-fist scroll-animate"
+          data-reveal className={`${tw.decor} ${tw.decorFist} ${tw.reveal}`}
         />
 
-        <div className="about-title-group scroll-animate">
+        <div data-reveal className={tw.reveal}>
 
-          <h1>
+          <h1 className={tw.aboutTitle}>
             ABOUT US
           </h1>
 
-          <div className="about-line">
-            <span></span>
+          <div className={tw.aboutLine}>
+            <span className={tw.aboutLineInner}></span>
           </div>
 
         </div>
@@ -109,24 +109,25 @@ function About( {embedded = false }) {
           FOUNDER
       ===================================================== */}
 
-      <section className="person-section person-one">
+      <section className={`${tw.personSection} ${tw.personOne}`}>
 
         {/* Decoration */}
 
         <img
           src="/about/heart.png"
           alt=""
-          className="about-decoration decor-heart-one scroll-animate"
+          data-reveal className={`${tw.decor} ${tw.decorHeartOne} ${tw.reveal}`}
         />
 
 
         {/* Character */}
 
-        <div className="person-image person-image-left scroll-animate">
+        <div data-reveal className={`${tw.personImage} ${tw.reveal}`}>
 
           <img
             src="/about/spiker.png"
             alt="Founder"
+            className="motion-safe:[animation:gentleFloat_5s_ease-in-out_infinite]"
           />
 
         </div>
@@ -134,23 +135,23 @@ function About( {embedded = false }) {
 
         {/* Information */}
 
-        <div className="person-info person-info-right scroll-animate">
+        <div data-reveal className={`${tw.personInfo} ${tw.reveal}`}>
 
-          <div className="person-line"></div>
+          <div className={tw.personLine}></div>
 
-          <div className="person-content">
+          <div className={tw.personContent}>
 
-            <h2>
+            <h2 className={tw.personName}>
               Spiker Sameeyol
               <br />
               (Sanjit Raghuvanshi)
             </h2>
 
-            <h3>
+            <h3 className={tw.personRole}>
               Founder of Masterin7ways
             </h3>
 
-            <p>
+            <p className={tw.personBio}>
               Sanjit is the Founder of Masterin7ways and the
               creative force behind its visual production. He leads
               camera operations, filmmaking, editing, photography,
@@ -171,7 +172,7 @@ function About( {embedded = false }) {
           CO-FOUNDER
       ===================================================== */}
 
-      <section className="person-section person-two">
+      <section className={`${tw.personSection} ${tw.personTwo}`}>
 
 
         {/* Decorations */}
@@ -179,33 +180,33 @@ function About( {embedded = false }) {
         <img
           src="/about/splash.png"
           alt=""
-          className="about-decoration decor-splash scroll-animate"
+          data-reveal className={`${tw.decor} ${tw.decorSplash} ${tw.reveal}`}
         />
 
         <img
           src="/about/heart.png"
           alt=""
-          className="about-decoration decor-heart-two scroll-animate"
+          data-reveal className={`${tw.decor} ${tw.decorHeartTwo} ${tw.reveal}`}
         />
 
 
         {/* Information */}
 
-        <div className="person-info person-info-left scroll-animate">
+        <div data-reveal className={`${tw.personInfo} ${tw.reveal}`}>
 
-          <div className="person-line"></div>
+          <div className={tw.personLine}></div>
 
-          <div className="person-content">
+          <div className={tw.personContent}>
 
-            <h2>
+            <h2 className={tw.personName}>
               Nimmy
             </h2>
 
-            <h3>
+            <h3 className={tw.personRole}>
               Co-Founder of Masterin7ways
             </h3>
 
-            <p>
+            <p className={tw.personBio}>
               Nimmy is the Co-Founder and Creative Director of
               Masterin7ways, bringing together psychology,
               storytelling, art, strategy, and emerging technology.
@@ -225,11 +226,12 @@ function About( {embedded = false }) {
 
         {/* Character */}
 
-        <div className="person-image person-image-right scroll-animate">
+        <div data-reveal className={`${tw.personImage} ${tw.reveal}`}>
 
           <img
             src="/about/nimmy.png"
             alt="Nimmy"
+            className="motion-safe:[animation:gentleFloat_5s_ease-in-out_infinite]"
           />
 
         </div>
@@ -244,13 +246,13 @@ function About( {embedded = false }) {
       <img
         src="/about/flower.png"
         alt=""
-        className="about-decoration decor-flower scroll-animate"
+        data-reveal className={`${tw.decor} ${tw.decorFlower} ${tw.reveal}`}
       />
 
       <img
         src="/about/ring.png"
         alt=""
-        className="about-decoration decor-ring scroll-animate"
+        data-reveal className={`${tw.decor} ${tw.decorRing} ${tw.reveal}`}
       />
 
 
@@ -258,7 +260,7 @@ function About( {embedded = false }) {
           FOOTER
       ===================================================== */}
 
-      <footer className="about-footer scroll-animate">
+      <footer data-reveal className={`${tw.footer} ${tw.reveal}`}>
 
         <Link to="/">
           ← BACK TO HOME
