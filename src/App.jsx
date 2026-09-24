@@ -1,4 +1,4 @@
-import "./App.css";
+import { tw } from "./tailwind";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import About from "./About";
@@ -90,21 +90,21 @@ function Homepage() {
 
   // Stop marquee compositing when it is offscreen or while the page is moving.
   useEffect(() => {
-    const tracks = document.querySelectorAll(".brands-track, .gallery-track");
+    const tracks = document.querySelectorAll("[data-marquee]");
     let scrollTimeout;
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => {
-        entry.target.classList.toggle("is-in-viewport", entry.isIntersecting);
+        entry.target.classList.toggle("running", entry.isIntersecting);
       }),
       { rootMargin: "200px 0px" }
     );
 
     tracks.forEach((track) => observer.observe(track));
     const pauseWhileScrolling = () => {
-      document.documentElement.classList.add("is-scrolling");
+      tracks.forEach((track) => track.classList.add("paused"));
       window.clearTimeout(scrollTimeout);
       scrollTimeout = window.setTimeout(() => {
-        document.documentElement.classList.remove("is-scrolling");
+        tracks.forEach((track) => track.classList.remove("paused"));
       }, 140);
     };
     window.addEventListener("scroll", pauseWhileScrolling, { passive: true });
@@ -113,7 +113,7 @@ function Homepage() {
       observer.disconnect();
       window.removeEventListener("scroll", pauseWhileScrolling);
       window.clearTimeout(scrollTimeout);
-      document.documentElement.classList.remove("is-scrolling");
+      tracks.forEach((track) => track.classList.remove("paused"));
     };
   }, []);
 
@@ -182,32 +182,32 @@ const getCharacterImage = () => {
 
 
   return (
-    <main className="site">
+    <main className={tw.site}>
 
       {/* TOP STRIP */}
 
-      <div className="top-strip">
+      <div className={tw.strip}>
         <span>© WE CREATE. YOU INSPIRE.</span>
       </div>
 
 
       {/* NAVIGATION */}
 
-      <nav className="navbar">
+      <nav className={tw.nav}>
 
-        <a href="/about">
+        <a className={tw.navLink} style={{ "--nav-delay": ".3s" }} href="/about">
           ABOUT
         </a>
 
-        <a href="#customers">
+        <a className={`${tw.navLink} max-[700px]:hidden`} style={{ "--nav-delay": ".4s" }} href="#customers">
           CUSTOMERS
         </a>
 
-        <a href="#projects">
+        <a className={tw.navLink} style={{ "--nav-delay": ".5s" }} href="#projects">
           PROJECTS
         </a>
 
-        <a href="mailto:masterin7ways@gmail.com?subject=Website%20Enquiry&body=Hello%20Masterin7ways,%0A%0AI%20would%20like%20to%20discuss%20a%20project.">
+        <a className={tw.navLink} style={{ "--nav-delay": ".6s" }} href="mailto:masterin7ways@gmail.com?subject=Website%20Enquiry&body=Hello%20Masterin7ways,%0A%0AI%20would%20like%20to%20discuss%20a%20project.">
           CONTACT
         </a>
 
@@ -216,28 +216,28 @@ const getCharacterImage = () => {
 
       {/* HERO */}
 
-      <section className="hero">
+      <section className={tw.hero}>
 
         {/* HUGE TITLE */}
 
-        <h1 className="hero-title">
+        <h1 className={tw.title}>
           MASTERIN7WAYS
         </h1>
 
 
         {/* TEXT */}
 
-        <div className="hero-copy">
+        <div className={tw.copy}>
 
-          <p>
+          <p className={tw.copyP}>
             SEVEN WAYS. ENDLESS POSSIBILITIES.
           </p>
 
-          <p>
+          <p className={`${tw.copyP} ${tw.copySecond}`}>
             CRAFTING IMPACTFUL STORIES
             <br />
             THROUGH CREATIVITY.
-            <span className="star">
+            <span className={tw.star}>
               ★
             </span>
           </p>
@@ -247,12 +247,12 @@ const getCharacterImage = () => {
 
         {/* CHARACTER */}
 
-        <div className="character-container">
+        <div className={tw.char}>
 
           <img
             src={getCharacterImage()}
             alt="Character"
-            className="character-image"
+            className={tw.charImage}
             draggable="false"
           />
 
@@ -261,17 +261,17 @@ const getCharacterImage = () => {
 
         {/* CONTACT */}
 
-        <div className="hero-contact">
+        <div className={tw.contactWrap}>
 
          <a
            href="mailto:masterin7ways@gmail.com?subject=Website%20Enquiry&body=Hello%20Masterin7ways,%0A%0AI%20would%20like%20to%20discuss%20a%20project."
-          className="contact-button">
+          className={`${tw.button} group`}>
 
-            <span>
+            <span className={tw.buttonText}>
               CONTACT US
             </span>
 
-            <span className="contact-arrow">
+            <span className={tw.arrow}>
               →
             </span>
 
@@ -286,52 +286,52 @@ const getCharacterImage = () => {
     PROJECT SHOWCASE
 ===================================================== */}
 
-<section className="showcase-section">
+<section id="projects" className={tw.showcase}>
 
   {/* BRAND LOGOS */}
 
-  <div className="brands-track-wrapper">
+  <div id="customers" className={tw.brandWrap}>
 
-    <div className="brands-track">
-<div className="brand">
-  <img src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async" />
+    <div data-marquee className={tw.brandTrack}>
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async" />
 </div>
 
-<div className="brand">
-  <img src="/logos/dji.png" alt="DJI" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/dji.png" alt="DJI" loading="lazy" decoding="async" />
 </div>
 
-<div className="brand">
-  <img src="/logos/hasselblad.png" alt="Hasselblad" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/hasselblad.png" alt="Hasselblad" loading="lazy" decoding="async" />
 </div>
 
-<div className="brand">
-  <img src="/logos/sigma.png" alt="Sigma" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/sigma.png" alt="Sigma" loading="lazy" decoding="async" />
 </div>
 
-<div className="brand">
-  <img src="/logos/insta360.png" alt="Insta360" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/insta360.png" alt="Insta360" loading="lazy" decoding="async" />
 </div>
 
       {/* duplicate for seamless loop */}
-<div className="brand">
-  <img src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/sony.png" alt="Sony" loading="lazy" decoding="async" />
 </div>
 
-<div className="brand">
-  <img src="/logos/dji.png" alt="DJI" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/dji.png" alt="DJI" loading="lazy" decoding="async" />
 </div>
 
-<div className="brand">
-  <img src="/logos/hasselblad.png" alt="Hasselblad" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/hasselblad.png" alt="Hasselblad" loading="lazy" decoding="async" />
 </div>
 
-<div className="brand">
-  <img src="/logos/sigma.png" alt="Sigma" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/sigma.png" alt="Sigma" loading="lazy" decoding="async" />
 </div>
 
-<div className="brand">
-  <img src="/logos/insta360.png" alt="Insta360" loading="lazy" decoding="async" />
+<div className={tw.brand}>
+  <img className={tw.brandImage} src="/logos/insta360.png" alt="Insta360" loading="lazy" decoding="async" />
 </div>
 
     </div>
@@ -343,10 +343,10 @@ const getCharacterImage = () => {
       IMAGE ROW 1
   ================================================= */}
 
-  <div className="gallery-row gallery-row-left">
+  <div className={tw.galleryRow}>
 
-    <div className="gallery-track">
-       <div className="gallery-card large">
+    <div data-marquee className={`${tw.galleryTrack} ${tw.galleryLeft}`}>
+       <div className={`${tw.card} ${tw.cardLarge}`}>
         <img
           src="/projects/image1.webp"
           alt="Mountain landscape"
@@ -354,7 +354,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card large">
+      <div className={`${tw.card} ${tw.cardLarge}`}>
         <img
           src="/projects/ganesh.webp"
           alt="ganesh"
@@ -362,7 +362,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card extra-large">
+      <div className={`${tw.card} ${tw.cardXL}`}>
         <img
           src="/projects/portrait.webp"
           alt="Portrait"
@@ -370,7 +370,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card medium">
+      <div className={`${tw.card} ${tw.cardMedium}`}>
         <img
           src="/projects/horse.webp"
           alt="horse"
@@ -380,7 +380,7 @@ const getCharacterImage = () => {
 
 
       {/* duplicate */}
-      <div className="gallery-card large">
+      <div className={`${tw.card} ${tw.cardLarge}`}>
         <img
           src="/projects/image1.webp"
           alt="Mountain landscape"
@@ -388,7 +388,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card large">
+      <div className={`${tw.card} ${tw.cardLarge}`}>
         <img
           src="/projects/ganesh.webp"
           alt="ganesh"
@@ -396,7 +396,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card extra-large">
+      <div className={`${tw.card} ${tw.cardXL}`}>
         <img
           src="/projects/portrait.webp"
           alt="Portrait"
@@ -404,7 +404,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card medium">
+      <div className={`${tw.card} ${tw.cardMedium}`}>
         <img
           src="/projects/horse.webp"
           alt="horse"
@@ -421,11 +421,11 @@ const getCharacterImage = () => {
       IMAGE ROW 2
   ================================================= */}
 
-  <div className="gallery-row gallery-row-right">
+  <div className={tw.galleryRow}>
 
-    <div className="gallery-track">
+    <div data-marquee className={`${tw.galleryTrack} ${tw.galleryRight}`}>
 
-      <div className="gallery-card wide">
+      <div className={`${tw.card} ${tw.cardWide}`}>
         <img
           src="/projects/sitting.webp"
           alt="sitting near ghat"
@@ -433,7 +433,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card wide">
+      <div className={`${tw.card} ${tw.cardWide}`}>
         <img
           src="/projects/model.webp"
           alt="3d model"
@@ -442,7 +442,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card wide">
+      <div className={`${tw.card} ${tw.cardWide}`}>
         <img
           src="/projects/temple.webp"
           alt="Temple"
@@ -452,14 +452,14 @@ const getCharacterImage = () => {
       </div>
 
 
-  <div className="gallery-card extra-large">
+  <div className={`${tw.card} ${tw.cardXL}`}>
     <img src="/projects/table.webp" alt="Project 7" loading="lazy" decoding="async" />
   </div>
 
 
       {/* duplicate */}
 
-      <div className="gallery-card wide">
+      <div className={`${tw.card} ${tw.cardWide}`}>
         <img
           src="/projects/sitting.webp"
           alt="sitting near ghat"
@@ -467,7 +467,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card wide">
+      <div className={`${tw.card} ${tw.cardWide}`}>
         <img
           src="/projects/model.webp"
           alt="3d model"
@@ -476,7 +476,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-      <div className="gallery-card wide">
+      <div className={`${tw.card} ${tw.cardWide}`}>
         <img
           src="/projects/temple.webp"
           alt="Temple"
@@ -485,7 +485,7 @@ const getCharacterImage = () => {
         />
       </div>
 
-  <div className="gallery-card extra-large">
+  <div className={`${tw.card} ${tw.cardXL}`}>
     <img src="/projects/table.webp" alt="Project 7" loading="lazy" decoding="async" />
     
   </div>
@@ -497,14 +497,14 @@ const getCharacterImage = () => {
 
   {/* DOTS */}
 
-  <div className="showcase-dots">
+  <div className={tw.dots}>
 
-    <span className="active"></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
+    <span className={`${tw.dot} ${tw.dotActive}`}></span>
+    <span className={tw.dot}></span>
+    <span className={tw.dot}></span>
+    <span className={tw.dot}></span>
+    <span className={tw.dot}></span>
+    <span className={tw.dot}></span>
 
   </div>
 

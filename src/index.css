@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: #050505;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  button,
+  a {
+    font: inherit;
+  }
+}
+
+@keyframes navReveal { to { opacity: 1; transform: translateY(0); } }
+@keyframes titleReveal { 0% { opacity: 0; transform: translate(-50%, 40px); } 100% { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes mobileTitleReveal { 0% { opacity: 0; transform: translate(-50%, 30px) scaleX(.84); } 100% { opacity: 1; transform: translate(-50%, 0) scaleX(.88); } }
+@keyframes stripReveal { 0% { opacity: 0; transform: scaleX(.5); } 100% { opacity: 1; transform: scaleX(1); } }
+@keyframes characterReveal { 0% { opacity: 0; transform: translateY(100px) scale(.94); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes characterRevealMobile { 0% { opacity: 0; transform: translateY(60px) scale(.94); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes characterFloatMobile { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes copyReveal { 0% { opacity: 0; transform: translateX(-40px); } 100% { opacity: 1; transform: translateX(0); } }
+@keyframes contactReveal { 0% { opacity: 0; transform: translateX(40px); } 100% { opacity: 1; transform: translateX(0); } }
+@keyframes characterGlow { 0%,100% { opacity: .45; transform: translateX(-50%) scale(.95); } 50% { opacity: .75; transform: translateX(-50%) scale(1.05); } }
+@keyframes brandsMove { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@keyframes galleryLeft { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+@keyframes galleryRight { from { transform: translate3d(-50%,0,0); } to { transform: translate3d(0,0,0); } }
+@keyframes gentleFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
