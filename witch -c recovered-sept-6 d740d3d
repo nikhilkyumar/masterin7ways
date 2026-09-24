@@ -1,0 +1,24 @@
+f82228f | Fri Sep 25 02:57:31 2026 | backup current project
+d740d3d | Sun Sep 6 02:12:12 2026 | lag fixed
+5ba393a | Sat Sep 5 21:57:32 2026 | minor fix
+be9582e | Sat Sep 5 18:12:35 2026 | error fixed about
+884e713 | Sat Sep 5 18:04:42 2026 | added about page
+3e40303 | Sat Sep 5 01:46:44 2026 | readme
+2bffdce | Sat Sep 5 01:42:55 2026 | space issue fixed
+d50455c | Sat Sep 5 01:33:51 2026 | Update README with project description and links
+bed04fc | Sat Sep 5 01:32:29 2026 | final mvp
+a1c446b | Fri Sep 4 19:50:38 2026 | ui change
+7c76ebe | Fri Sep 4 17:20:13 2026 | Add missing closing tag for HTML
+c90c586 | Fri Sep 4 17:13:10 2026 | Add Vite entry file
+ef4244a | Fri Sep 4 17:02:23 2026 | basic structure
+1d3985e | Fri Sep 4 16:57:54 2026 | Delete style.css
+90c1414 | Fri Sep 4 16:57:39 2026 | Delete script.js
+d2cf991 | Fri Sep 4 16:57:18 2026 | Delete index.html
+2a9daad | Fri Sep 4 16:46:39 2026 | basic structure created
+399d720 | Wed Aug 26 01:12:51 2026 | Update README.md
+73cf4cc | Wed Aug 26 00:37:41 2026 | Change website URL to masterin7ways.com
+b19952f | Tue Jul 21 11:16:41 2026 | Add site link to README
+754a1b1 | Thu Jul 2 00:30:17 2026 | href link fixed
+5697293 | Thu Jul 2 00:20:06 2026 | error fixed
+5579e40 | Thu Jul 2 00:18:27 2026 | removed portfolio
+54aa30a | Wed Jul 1 23:56:42 2026 | first commit
